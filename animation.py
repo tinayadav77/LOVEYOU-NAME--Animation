@@ -1,8 +1,7 @@
 import pygame
 import math
 
-# -------------------- SETTINGS --------------------
-
+# --- SETTINGS ---
 WIDTH = 1000
 HEIGHT = 600
 
@@ -23,7 +22,7 @@ LETTER_GAP = 65
 # Distance between particle positions
 SAMPLE_GAP = 7
 
-# ---------------------------------------------------
+
 
 pygame.init()
 
@@ -46,10 +45,8 @@ particle_font = pygame.font.SysFont(
 )
 
 
-# ---------------------------------------------------
-# CREATE LETTER TARGETS
-# ---------------------------------------------------
 
+# CREATE LETTER TARGETS
 letters = ["T", "I", "N", "A"]
 
 letter_targets = []
@@ -73,9 +70,9 @@ start_x = (WIDTH - total_width) // 2
 current_x = start_x
 
 
-# ---------------------------------------------------
+
 # CREATE TARGET POSITIONS FOR EACH LETTER
-# ---------------------------------------------------
+
 
 for letter_index, letter in enumerate(letters):
 
@@ -116,9 +113,7 @@ for letter_index, letter in enumerate(letters):
     current_x += letter_width + LETTER_GAP
 
 
-# ---------------------------------------------------
 # PARTICLE CLASS
-# ---------------------------------------------------
 
 class Particle:
 
@@ -164,9 +159,8 @@ class Particle:
         screen.blit(particle, rect)
 
 
-# ---------------------------------------------------
+
 # ANIMATION VARIABLES
-# ---------------------------------------------------
 
 particles = []
 
@@ -178,23 +172,18 @@ spawn_timer = 0
 animation_finished = False
 
 
-# ---------------------------------------------------
+
 # MAIN LOOP
-# ---------------------------------------------------
 
 running = True
 
 while running:
-
-    # ---------------- EVENTS ----------------
 
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:
             running = False
 
-
-    # ---------------- ANIMATION ----------------
 
     if not animation_finished:
 
@@ -205,10 +194,8 @@ while running:
 
             spawn_timer += clock.get_time()
 
-            # -----------------------------------
             # SPAWN PARTICLES FOR CURRENT LETTER
-            # -----------------------------------
-
+            
             if (
                 spawn_timer >= 1000 / PARTICLES_PER_SECOND
                 and next_particle < len(current_targets)
@@ -216,13 +203,10 @@ while running:
 
                 target_x, target_y = current_targets[next_particle]
 
-                # --------------------------------
                 # STARTING POINT
-                # --------------------------------
-                #
                 # Start from the BOTTOM of
                 # the current letter.
-                #
+                
                 root_x = current_targets[len(current_targets) // 2][0]
                 root_y = HEIGHT + 20
 
@@ -241,19 +225,12 @@ while running:
 
                 spawn_timer = 0
 
-
-            # -----------------------------------
             # MOVE PARTICLES
-            # -----------------------------------
-
             for particle in particles:
                 particle.update()
 
-
-            # -----------------------------------
             # CURRENT LETTER COMPLETED?
-            # -----------------------------------
-
+        
             if (
                 next_particle == len(current_targets)
                 and all(
@@ -275,8 +252,6 @@ while running:
 
                     animation_finished = True
 
-
-    # ---------------- DRAW ----------------
 
     screen.fill(BACKGROUND)
 
