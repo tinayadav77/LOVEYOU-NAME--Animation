@@ -1,7 +1,6 @@
 import pygame
 import math
 
-# --- SETTINGS ---
 WIDTH = 1000
 HEIGHT = 600
 
@@ -14,14 +13,13 @@ PARTICLE_FONT_SIZE = 7
 LETTER_FONT_SIZE = 170
 
 PARTICLES_PER_SECOND = 7
-MOVEMENT_SPEED = 0.05
+MOVEMENT_SPEED = 0.08
 
 # Space between letters
-LETTER_GAP = 65
+LETTER_GAP = 60
 
 # Distance between particle positions
 SAMPLE_GAP = 7
-
 
 
 pygame.init()
@@ -44,9 +42,6 @@ particle_font = pygame.font.SysFont(
     bold=True
 )
 
-
-
-# CREATE LETTER TARGETS
 letters = ["T", "I", "N", "A"]
 
 letter_targets = []
@@ -111,9 +106,6 @@ for letter_index, letter in enumerate(letters):
 
     # Move to next letter
     current_x += letter_width + LETTER_GAP
-
-
-# PARTICLE CLASS
 
 class Particle:
 
@@ -260,7 +252,7 @@ while running:
 
     pygame.display.flip()
 
-    clock.tick(60)
+    clock.tick(30)
 
 
 pygame.quit()
